@@ -1,0 +1,374 @@
+$optionOne: #4682B4;
+$optionTwo: #CD5C5C;
+$navBackground: #65D1A5;
+
+html, body, #root, #App {
+  height: 100%
+}
+
+#App {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  height: 100%;
+  background: rgb(70,130,180);
+  background: linear-gradient(90deg, rgba(70,130,180,1) 0%, rgba(205,92,92,1) 100%);
+}
+
+.wyr-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: auto;
+}
+
+#sign-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+
+  select {
+    border: 1px solid #000;
+    border-radius: 4px;
+    width: 250px;
+    height: 40px;
+    padding: 10px 15px;
+    outline: 0px;
+  }
+
+  button {
+    height: 40px;
+    margin-left: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
+    outline:0px;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  background-color: $navBackground;
+
+  #nav-links {
+    padding: 0px 20px;
+
+    a, a:visited, a:hover, a:active {
+      margin: 0px 5px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+
+    .active {
+      border-bottom: 1px solid #000;
+      border-width: 2px;
+    }
+  }
+
+  #nav-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+    margin: 0px 5px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+
+    #nav-user-name {
+      margin: 0px 10px;
+    }
+
+    #nav-sign-out {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+#questions-page {
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid #000;
+  overflow: scroll;
+  max-height: 98%;
+
+  #menu-bar {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+
+    .menu-item {
+      background-color: #bbb;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.active {
+        background-color: #ccc;
+      }
+    }
+  }
+
+  #questions {
+    padding: 5px;
+    background-color: rgb(255, 255, 255, 0.9);
+
+    .question-item {
+      padding: 10px;
+    }
+
+    .question-name {
+      background-color: #666;
+      color: #eee;
+      height: 35px;
+      padding-top: 5px;
+      padding-left: 10px;
+      font-size: 16px;
+      font-weight: 500;   
+      border: 1px solid #ccc;
+    }
+
+    .question {
+      border: 1px solid #ccc;
+    }
+
+    .question-avatar {
+      float: left;
+      width: 125px;
+      text-align: center;
+      padding: 25px;
+     }
+
+    .question-content {
+      display: inline-block;
+      padding: 10px;
+
+      .question-header {
+        font-size: 18px;
+        font-weight: 500;
+        padding-bottom: 5px;        
+      }
+
+      .question-preview {
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
+      .question-btn {
+        margin-top: 5px;
+        border: 2px solid #000;
+        padding: 5px;
+        color: #000;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+
+        a:link, a:hover, a:visited, a:active {
+          text-decoration:none;
+          color: #000;
+        }
+
+        &:hover {
+          background-color: #dfdfdf;
+        }
+
+      }
+    }
+  }
+}
+
+#answer_question {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+
+  .linear-background {
+    background: linear-gradient(
+      to right,
+      $optionOne 0%,
+      $optionOne 50%,
+      $optionTwo 50%,
+      $optionTwo 100%
+    );
+  }
+  #would-you-rather-author {
+    text-align: center;
+    padding: 50px;
+  }
+
+  #would-you-rather-author-avatar {
+    padding-bottom: 5px;
+  }
+  #would-you-rather-title {
+    padding: 25px;
+    text-align: center;
+    font-size: 35px;
+  }
+  form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+
+    .form-option {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0px 5px;    }
+
+    #form-option-one {
+      background-color: $optionOne;
+    }
+
+    #form-option-two {
+      background-color: $optionTwo;
+    }
+
+    button {
+      cursor: pointer;
+      margin: 10px;
+      padding: 5px;
+      background-color: transparent;
+      border: 1px solid #000;
+      min-width: 75px;
+      min-height: 30px;
+      font-size: 15px;
+      text-transform: uppercase;
+      font-weight: 600;
+
+      &:hover {
+        background-color: #65D1A5;
+      }
+    }
+  }
+}
+
+#question-response {
+  border: 1px solid #000;
+
+  .author {
+    height: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: 1px solid #000;
+    text-align: center;
+  }
+
+  .result {
+    font-weight: 500;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 25px;
+    text-transform: uppercase;
+  }
+
+  .option-box {
+    padding: 10px;
+    border: 1px dashed black;
+    margin: 25px;
+    background: rgb(255,255,255, 0.1);
+    min-height: 135px;
+
+    &.selected {
+      background: rgb(255,255,255, 0.5);
+    }
+
+    .result-title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .result-votes {
+      padding: 10px 0px;
+
+      .result-votes-text {
+        padding-top: 5px;
+      }
+    }
+
+    .result-yourvote {
+      text-align: right;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+}
+
+
+#add_question {
+  padding: 25px;
+  max-width: 500px;
+  margin: 0 auto;
+
+  input {
+    display: block;
+    padding: 5px;
+    margin: 10px 0px;
+    width: 100%;
+  }
+
+  #add_question_form_or {
+    text-align: center;
+  }
+}
+
+#leaderboard {
+  padding: 25px;
+  max-width: 500px;
+  margin: 0 auto;
+
+  .leaderboard-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    padding: 15px;
+    margin-bottom: 10px;
+
+    .leaderboard-avatar {
+      padding: 10px;
+    }
+
+    .leaderboard-info {
+      min-width: 250px;
+      padding: 0px 10px;
+
+      .leaderboard-name {
+        font-weight: 600;
+      }
+    }
+  }
+}
