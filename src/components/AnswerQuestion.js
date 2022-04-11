@@ -14,6 +14,8 @@ function AnswerQuestion () {
   const { id } = useParams()
   const dispatch = useDispatch();
 
+  const paramIdExists = Object.keys(questions).includes(id);
+
   const userLookup = (user_id) => {
     return users[user_id].name;
   }
@@ -22,9 +24,6 @@ function AnswerQuestion () {
     e.preventDefault();
     dispatch(handleAnswerQuestion({qid: id,	authedUser, answer: e.target.id}));
   }
-
-  const optionOneVotes = questions[id].optionOne.votes.length
-  const optionTwoVotes = questions[id].optionTwo.votes.length
 
   const totalVotes = () => {
     return questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length;
@@ -39,11 +38,14 @@ function AnswerQuestion () {
     return returnStr
   }
 
-  const questionAuthor = userLookup(questions[id].author)
+  const questionAuthor = paramIdExists ? userLookup(questions[id].author) : '404';
+  const optionOneVotes = paramIdExists ? questions[id].optionOne.votes.length : '0';
+  const optionTwoVotes = paramIdExists ? questions[id].optionTwo.votes.length : '0';
 
   return (
     <div className="wyr-container">
-    {!questionAnswer ? (
+    { paramIdExists ? <>
+      {!questionAnswer ? (
         <div id="answer_question">
         <div id="would-you-rather-author" className="linear-background">
           <div id="would-you-rather-author-avatar"><Image src={users[questions[id].author].avatarURL} height="50" width="50" roundedCircle/></div>
@@ -83,6 +85,10 @@ function AnswerQuestion () {
             </div>
         </div>
         )}
+      </> :
+      <><div id="404">Page Not Found. Everything is ruined forever now.</div>
+    </>
+    }
     </div>
   );
 }
