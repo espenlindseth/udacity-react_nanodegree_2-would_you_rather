@@ -24,6 +24,7 @@ main {
   height: 100%;
   background: rgb(70,130,180);
   background: linear-gradient(90deg, rgba(70,130,180,1) 0%, rgba(205,92,92,1) 100%);
+  overflow: auto;
 }
 
 .wyr-container {
@@ -34,12 +35,48 @@ main {
   overflow: auto;
 }
 
+#spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .loading-text {
+    font-size: 30px;
+  }
+  .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
 #sign-in {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100%;
 
   select {
     border: 1px solid #000;
@@ -67,6 +104,10 @@ nav {
   width: 100%;
   height: 40px;
   background-color: $navBackground;
+
+  &.gradient {
+    background: linear-gradient(90deg, rgba(70,130,180,1) 0%, rgba(205,92,92,1) 100%);
+  }
 
   #nav-links {
     padding: 0px 20px;
@@ -277,6 +318,7 @@ nav {
 
 #question-response {
   border: 1px solid #000;
+  min-width: 500px;
 
   .author {
     height: 30px;

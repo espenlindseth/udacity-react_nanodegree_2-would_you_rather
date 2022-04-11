@@ -16,7 +16,7 @@ function SignIn (props) {
   }
 
   return (
-    <nav>
+    <nav className={!authedUser ? "gradient" : ""}>
       {authedUser && (<>
         <div id="nav-links">
           <span className={(location.pathname === '/') ? 'active': ''}><Link to='/'>ANSWER QUESTION</Link></span>&nbsp;

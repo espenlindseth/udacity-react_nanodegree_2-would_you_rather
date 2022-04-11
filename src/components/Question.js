@@ -1,10 +1,17 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { questionAnswer } from '../actions/shared';
 
 function Question (props) {
 
   const { users } = useSelector((state) => ({ ...state }));
   const { questions } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(questionAnswer(null));
+  }
 
   const userLookup = (user_id) => {
     return users[user_id].name;
@@ -26,7 +33,7 @@ function Question (props) {
         <div className="question-content">
           <div className="question-header">Would you rather</div>
           <div className="question-preview">{formatQuestion(questions[props.id].optionOne.text)}...</div>
-          <div className="question-btn"><Link to={`/question/${props.id}`}>Answer Now</Link></div>
+          <div className="question-btn"><Link onClick={handleClick} to={`/questions/${props.id}`}>Answer Now</Link></div>
         </div>
       </div>
     </>

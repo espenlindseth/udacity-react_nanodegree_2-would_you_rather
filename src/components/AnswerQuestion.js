@@ -1,22 +1,18 @@
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
 import { handleAnswerQuestion } from '../actions/questions';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.css';
-function AnswerQuestion (props) {
+
+function AnswerQuestion () {
 
   const { users } = useSelector((state) => ({ ...state }));
   const { questions } = useSelector((state) => ({ ...state }));
   const { authedUser } = useSelector((state) => ({ ...state }));
+  const { questionAnswer } = useSelector((state) => ({ ...state }));
   const { id } = useParams()
-  const [ answerSubmitted, setAnswerSubmitted] = useState (false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setAnswerSubmitted(false);
-  }, []);
 
   const userLookup = (user_id) => {
     return users[user_id].name;
@@ -25,7 +21,6 @@ function AnswerQuestion (props) {
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(handleAnswerQuestion({qid: id,	authedUser, answer: e.target.id}));
-    setAnswerSubmitted(e.target.id);
   }
 
   const optionOneVotes = questions[id].optionOne.votes.length
@@ -48,7 +43,7 @@ function AnswerQuestion (props) {
 
   return (
     <div className="wyr-container">
-    {!answerSubmitted ? (
+    {!questionAnswer ? (
         <div id="answer_question">
         <div id="would-you-rather-author" className="linear-background">
           <div id="would-you-rather-author-avatar"><Image src={users[questions[id].author].avatarURL} height="50" width="50" roundedCircle/></div>
@@ -69,22 +64,22 @@ function AnswerQuestion (props) {
         (<div id="question-response">
             <div className="author">{questionAuthor} asked</div>
             <div className="result">Results</div>
-            <div className={`option-box ${(answerSubmitted === "optionOne") ? "selected" : ""}`}>
+            <div className={`option-box ${(questionAnswer === "optionOne") ? "selected" : ""}`}>
               <div className="result-title">Would you rather {questions[id].optionOne.text}</div>
               <div className="result-votes">
                 <ProgressBar variant="danger" now={votePercentage(optionOneVotes)} label={`${votePercentage(optionOneVotes)}%`} />
                 <div className="result-votes-text">{optionOneVotes} of {totalVotes()} votes.</div>
               </div>
-              {(answerSubmitted === "optionOne") && (<div className="result-yourvote">YOUR VOTE</div>)}
+              {(questionAnswer === "optionOne") && (<div className="result-yourvote">YOUR VOTE</div>)}
             </div>
 
-            <div className={`option-box ${(answerSubmitted === "optionTwo") ? "selected" : ""}`}>
+            <div className={`option-box ${(questionAnswer === "optionTwo") ? "selected" : ""}`}>
               <div className="result-title">Would you rather {questions[id].optionTwo.text}</div>
               <div className="result-votes">
                 <ProgressBar variant="danger" now={votePercentage(optionTwoVotes)} label={`${votePercentage(optionTwoVotes)}%`} />
                 <div className="result-votes-text">{optionTwoVotes} of {totalVotes()} votes.</div>
               </div>
-              {(answerSubmitted === "optionTwo") && (<div className="result-yourvote">YOUR VOTE</div>)}
+              {(questionAnswer === "optionTwo") && (<div className="result-yourvote">YOUR VOTE</div>)}
             </div>
         </div>
         )}

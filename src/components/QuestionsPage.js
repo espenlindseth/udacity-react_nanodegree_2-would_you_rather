@@ -7,9 +7,17 @@ function QuestionsPage () {
   const { users } = useSelector((state) => ({ ...state }));
   const { questions } = useSelector((state) => ({ ...state }));
 
-  const answeredKeys = Object.keys(users[authedUser].answers);
+  const sortQuestionArr = (arr) => {
+    arr.sort((a, b) => {
+      return questions[b].timestamp - questions[a].timestamp;
+    });;
+  }
+
+  const answeredKeys = Object.keys(users[authedUser].answers)
   const questionKeys = Object.keys(questions);
-  const unansweredKeys = questionKeys.filter(id => !answeredKeys.includes(id));
+  sortQuestionArr(answeredKeys);
+  const unansweredKeys = questionKeys.filter(id => !answeredKeys.includes(id))
+  sortQuestionArr(unansweredKeys);
   const [ selectedQuestions, setSelectedQuestions] = useState(unansweredKeys);
   const [ menuItemAnsweredActive, setMenuItemAnsweredActive] = useState('');
   const [ menuItemUnansweredActive, setMenuItemUnansweredActive] = useState('active');
